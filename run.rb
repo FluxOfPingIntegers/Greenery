@@ -1,7 +1,4 @@
-require 'open-uri'
-require 'nokogiri'
-require 'net/http'
-require 'pry'
+require_relative './config/environment'
 
 url = URI.parse("https://en.wikipedia.org/wiki/Hardiness_zone")
 response = Net::HTTP.get(url)
