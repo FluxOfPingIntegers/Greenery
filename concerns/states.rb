@@ -1,3 +1,4 @@
+require_relative './config/environment'
 class State
   attr_accessor :cities
   attr_reader :name, :abb
@@ -10,7 +11,13 @@ class State
   end
 
   def save
-    @@all << self
+    if self.all.none? {|x| x == self}
+    self.all << self
+    end
+  end
+
+  def self.all
+    @@all
   end
 
 end
