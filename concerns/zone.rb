@@ -12,11 +12,13 @@ class Zone
     self.save
   end
 
+  #This method needs review
   def add_plant(plant)
     if @plants.none? { |x| x.name == plant.name}
         @plants << plant
     end
   end
+  #This method needs review
 
   def cleanup(name)
     if name.include? "/"
