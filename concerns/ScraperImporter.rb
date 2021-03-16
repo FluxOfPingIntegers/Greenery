@@ -1,15 +1,26 @@
 class ScraperImporter
+  attr_accessor :name
 
-  def self.states
+  def initialize(name)
+    @name = name
+    self.states
+    self.zones
+    self.cities
+  end
+
+  def states
   
   end
 
-  def self.zones
+  def zones
 
   end
 
-  def self.cities
-
+  def cities
+    url = URI.parse("https://en.wikipedia.org/wiki/Hardiness_zone")
+    response = Net::HTTP.get(url)
+    noko_html = Nokogiri::HTML(response)
+    binding.pry
   end
 
 

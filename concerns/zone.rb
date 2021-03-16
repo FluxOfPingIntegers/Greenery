@@ -1,4 +1,5 @@
 class Zone
+  include Findable::InstanceMethods
   attr_accessor :name, :plants
 
   @@all = []
@@ -10,13 +11,11 @@ class Zone
     self.save
   end
 
-  #This method needs review
   def add_plant(plant)
     if @plants.none? { |x| x.name == plant.name}
         @plants << plant
     end
   end
-  #This method needs review
 
   def cleanup(name)
     if name.include? "/"
@@ -38,12 +37,6 @@ class Zone
 
   def all
     @@all
-  end
-
-  def save
-    if self.all.none? {|x| x.name == self.name}
-    self.all << self
-    end
   end
 
   def self.all
