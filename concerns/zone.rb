@@ -1,14 +1,12 @@
 class Zone
-  attr_accessor :name, :num, :plants
+  attr_accessor :name, :plants
 
   @@all = []
-  
-  @plants = []
 
   def initialize(name)
     name = self.cleanup(name)
-    @name = name
-    @num = self.clean(name)
+    @name = self.clean(name)
+    @plants = []
     self.save
   end
 
