@@ -36,3 +36,4 @@ class Zone
   end
 
 end
+# Discovered issue with Zones being initialized with names like "10a" in which @num = "1" instead of @num = "10"
