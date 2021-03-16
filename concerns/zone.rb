@@ -6,10 +6,7 @@ class Zone
   @plants = []
 
   def initialize(name)
-    if name.include? "/"
-      x = name.split("/")
-      name = x[0]
-    end
+    name = self.cleanup(name)
     @name = name
     @num = name.chars.first
     self.save
@@ -18,6 +15,14 @@ class Zone
   def add_plant(plant)
     if @plants.none? { |x| x.name == plant.name}
         @plants << plant
+    end
+  end
+
+  def cleanup(name)
+    if name.include? "/"
+      x = name.split("/")
+      name = x[0]
+      name
     end
   end
 

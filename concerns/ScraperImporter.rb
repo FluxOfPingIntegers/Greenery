@@ -4,14 +4,13 @@ class ScraperImporter
   
   end
 
-  def self.cities
-
-  end
-
   def self.zones
 
   end
 
+  def self.cities
+
+  end
 
 
 

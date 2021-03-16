@@ -1,12 +1,9 @@
-class State
-  attr_accessor :cities
-  attr_reader :name, :abb
+class Plant
+  attr_accessor :name
 
   @@all = []
-  def initialize(name, abb)
+  def initialize(name, zone = nil)
     @name = name
-    @abb = abb
-    @cities = []
     self.save
   end
 
