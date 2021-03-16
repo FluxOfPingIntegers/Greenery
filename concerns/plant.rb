@@ -2,7 +2,7 @@ class Plant
   attr_accessor :name
 
   @@all = []
-  def initialize(name, zone = nil)
+  def initialize(name)
     @name = name
     self.save
   end
