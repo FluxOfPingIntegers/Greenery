@@ -8,7 +8,7 @@ class Zone
   def initialize(name)
     name = self.cleanup(name)
     @name = name
-    @num = name.chars.first
+    @num = self.clean(name)
     self.save
   end
 
@@ -22,8 +22,18 @@ class Zone
     if name.include? "/"
       x = name.split("/")
       name = x[0]
-      name
     end
+    name
+  end
+
+  def clean(name)
+    if name.length == 3
+      name = name.delete_suffix("a")
+      name = name.delete_suffix("b")
+    else
+      name = name.chars.first
+    end
+    name
   end
 
   def all
@@ -41,4 +51,3 @@ class Zone
   end
 
 end
-# Discovered issue with Zones being initialized with names like "10a" in which @num = "1" instead of @num = "10"
