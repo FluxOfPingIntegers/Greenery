@@ -12,7 +12,7 @@ Getting Started
 In your terminal, type “ruby run.rb”
 
   Step 2:
-After reading the prompt, please type in the two letter abbreviation for you state.  If you happen to reside in Puerto Rico you can simply type your countries name.
+After reading the prompt, please type in the two letter abbreviation for your state.  If you happen to reside in Puerto Rico you can simply type your countries name.
 
   Step 3:
 If there are multiple zones for your state, you will be prompted to select the city closest to you.  Please use the arrow keys to select which city is closest to your garden and press enter.
