@@ -4,15 +4,17 @@ class Zone
 
   @@all = []
 
+  
   def initialize(name)
-    name = self.cleanup(name)
-    @name = self.clean(name)
+  #  name = self.cleanup(name)
+  #  @name = self.clean(name)
+    @name = name
     @plants = []
     self.save
   end
 
   def add_plant(plant)
-    if @plants.none? { |x| x.name == plant.name}
+    if @plants.none? {plant}
         @plants << plant
     end
   end
