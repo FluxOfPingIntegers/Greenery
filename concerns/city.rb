@@ -1,18 +1,36 @@
 class City
   attr_accessor :name, :state, :zone
 
-  def initialize(name, state, zone)
-    @name = name
-    @state = state
-    @zone = zone
-    self.check
+  def initialize(title, zone)
+    self.zone_cleanup(zone)
+    self.title_assign(title, zone)
+    x = @state
+    x.cities << self
   end
 
-  def check
-    if State.all.each.none? {|x| x.cities == self.name}
-      x = State.all.select {|x| x.name == self.state}
-      binding.pry
-      x[0].cities << self
+  def title_assign(title, zone)
+    x = title.split(",")
+    @name = x[0]
+    x[1].delete_prefix!(" ")
+    if x[1].include?("/")
+      y = x[1].split("/")
+     state = State.all.select{|state| state.name == y[0]}
+     @state = state[0]
+     City.new("#{x[0]}, #{y[1]}", "#{zone}")
+    else
+      state = State.all.select{|state| state.name == x[1]}
+      @state = state[0]
     end
   end
+
+  def zone_cleanup(zone)
+    if zone.include? "/"
+      x = zone.split("/")
+      zone = x[0]
+    end
+    zone = zone.to_i
+    x = Zone.all.select {|i| i.name == zone}
+    @zone = x
+  end
+
 end
