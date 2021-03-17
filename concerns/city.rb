@@ -6,6 +6,7 @@ class City
     self.title_assign(title, zone)
     x = @state
     x.cities << self
+    @state = x.abb
   end
 
   def title_assign(title, zone)
