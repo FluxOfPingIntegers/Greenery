@@ -33,9 +33,7 @@ class ScraperImporter
   end
 
   def cities
-    url = URI.parse("https://en.wikipedia.org/wiki/Hardiness_zone")
-    response = Net::HTTP.get(url)
-    noko_html = Nokogiri::HTML(response)
+    
     cities = {
               "Helena, Montana" => 3, "Hayword, Wisconsin" => 3, "Jackson, Wyoming" => 3, "Bismark, North Dakota" => 4,
               "Concord, New Hampshire" => 5, "Cheyenne, Wyoming" => 5, "Frankfort, Kentucky" => 6, "Dover, Delaware" => 7,
