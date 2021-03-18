@@ -19,7 +19,7 @@ class ScraperImporter
        ["NE", "Nebraska"], ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NV", "Nevada"], 
        ["NY", "New York"], ["OH", "Ohio"], ["OK", "Oklahoma"], ["OR", "Oregon"], ["PA", "Pennsylvania"], ["PR", "Puerto Rico"], 
        ["RI", "Rhode Island"], ["SC", "South Carolina"], ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], 
-       ["UT", "Utah"], ["VA", "Virginia"], ["VI", "Virgin Islands"], ["VT", "Vermont"], ["WA", "Washington"], ["WI", "Wisconsin"], 
+       ["UT", "Utah"], ["VA", "Virginia"], ["VT", "Vermont"], ["WA", "Washington"], ["WI", "Wisconsin"], 
        ["WV", "West Virginia"], ["WY", "Wyoming"]
       ]
       states.each {|x| State.new("#{x[1]}", "#{x[0]}")}
@@ -36,7 +36,12 @@ class ScraperImporter
     url = URI.parse("https://en.wikipedia.org/wiki/Hardiness_zone")
     response = Net::HTTP.get(url)
     noko_html = Nokogiri::HTML(response)
-    binding.pry
+    cities = {
+              "Helena, Montana" => 3, "Hayword, Wisconsin" => 3, "Jackson, Wyoming" => 3, "Bismark, North Dakota" => 4,
+              "Concord, New Hampshire" => 5, "Cheyenne, Wyoming" => 5, "Frankfort, Kentucky" => 6, "Dover, Delaware" => 7,
+              "Trenton, New Jersey" => 7, "Little Rock, Arkansas" => 7, "Jackson, Mississippi" => 8, "Richmond, Virginia" => 7
+             }
+    cities.each_pair{|key, value| City.new("#{key}", "#{value}")}
   end
 
 
