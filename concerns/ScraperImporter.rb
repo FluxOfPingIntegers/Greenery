@@ -29,7 +29,21 @@ class ScraperImporter
   def zones
     zones = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
     zones.each {|x| Zone.new(x)}
-    @zone_names = zones
+    scraped_zones = Zone.all[1..10]
+
+    scraped_zones.each do |x|
+    url = URI.parse("https://www.almanac.com/plants/hardiness/#{x.name}")
+    response = Net::HTTP.get(url)
+    noko_html = Nokogiri::HTML(response)
+    c = 1
+    while c < 20
+      x.plants << noko_html.css(".field-content").children[c].content
+      c += 2
+    end
+  end
+
+    binding.pry
+
   end
 
   def cities
@@ -41,7 +55,6 @@ class ScraperImporter
     table_as_string = wiki_table.content
     city_data = table_as_string.split("\n")
     city_data.reject! {|x| x == "" || x == "City" || x == "State" || x == "Zone"}
-    #binding.pry
     scrape_cities = city_data.each_slice(2).to_h
     
     hard_cities = {
@@ -50,7 +63,6 @@ class ScraperImporter
               "Trenton, New Jersey" => 7, "Little Rock, Arkansas" => 7, "Jackson, Mississippi" => 8, "Richmond, Virginia" => 7
              }
     cities = scrape_cities.merge(hard_cities)
-    #binding.pry
     cities.each_pair{|key, value| City.new("#{key}", "#{value}")}
   end
 

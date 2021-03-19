@@ -6,8 +6,6 @@ class Zone
 
   
   def initialize(name)
-  #  name = self.cleanup(name)
-  #  @name = self.clean(name)
     @name = name
     @plants = []
     self.save
