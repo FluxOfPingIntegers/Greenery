@@ -17,6 +17,10 @@ class Zone
     end
   end
 
+  def plants
+    @plants
+  end
+  
   def cleanup(name)
     if name.include? "/"
       x = name.split("/")

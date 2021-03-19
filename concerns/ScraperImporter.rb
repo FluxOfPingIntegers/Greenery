@@ -32,17 +32,18 @@ class ScraperImporter
     scraped_zones = Zone.all[1..10]
 
     scraped_zones.each do |x|
-    url = URI.parse("https://www.almanac.com/plants/hardiness/#{x.name}")
-    response = Net::HTTP.get(url)
-    noko_html = Nokogiri::HTML(response)
-    c = 1
-    while c < 20
-      x.plants << noko_html.css(".field-content").children[c].content
-      c += 2
+      url = URI.parse("https://www.almanac.com/plants/hardiness/#{x.name}")
+      response = Net::HTTP.get(url)
+      noko_html = Nokogiri::HTML(response)
+      c = 1
+      while c < 20
+        x.plants << noko_html.css(".field-content").children[c].content
+        c += 2
+      end
     end
-  end
-
-    binding.pry
+    hard_plants = ["Basil", "Dill", "Mint", "Hibiscus", "Aloe", "Chili Peppers", "Cucumbers", "Spinach", "Bananas", "Avacados"]
+    zone12 = Zone.all[11]
+    zone12.plants = hard_plants
 
   end
 
