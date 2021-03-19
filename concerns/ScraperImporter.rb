@@ -11,7 +11,7 @@ class ScraperImporter
   def states
     states = [
       ["AK", "Alaska"], ["AL", "Alabama"], ["AR", "Arkansas"], ["AZ", "Arizona"], 
-       ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["D.C.", "Washington"], ["DE", "Delaware"], 
+       ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DC", "D.C.[11]"], ["DE", "Delaware"], 
        ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"],  ["IA", "Iowa"], ["ID", "Idaho"], 
        ["IL", "Illinois"], ["IN", "Indiana"], ["KS", "Kansas"], ["KY", "Kentucky"], ["LA", "Louisiana"], 
        ["MA", "Massachusetts"], ["MD", "Maryland"], ["ME", "Maine"], ["MI", "Michigan"], ["MN", "Minnesota"], 
@@ -33,12 +33,24 @@ class ScraperImporter
   end
 
   def cities
+
+    url = URI.parse("https://en.wikipedia.org/wiki/Hardiness_zone")
+    response = Net::HTTP.get(url)
+    noko_html = Nokogiri::HTML(response)
+    wiki_table = noko_html.css(".mw-parser-output").children[38]
+    table_as_string = wiki_table.content
+    city_data = table_as_string.split("\n")
+    city_data.reject! {|x| x == "" || x == "City" || x == "State" || x == "Zone"}
+    #binding.pry
+    scrape_cities = city_data.each_slice(2).to_h
     
-    cities = {
+    hard_cities = {
               "Helena, Montana" => 3, "Hayword, Wisconsin" => 3, "Jackson, Wyoming" => 3, "Bismark, North Dakota" => 4,
               "Concord, New Hampshire" => 5, "Cheyenne, Wyoming" => 5, "Frankfort, Kentucky" => 6, "Dover, Delaware" => 7,
               "Trenton, New Jersey" => 7, "Little Rock, Arkansas" => 7, "Jackson, Mississippi" => 8, "Richmond, Virginia" => 7
              }
+    cities = scrape_cities.merge(hard_cities)
+    #binding.pry
     cities.each_pair{|key, value| City.new("#{key}", "#{value}")}
   end
 

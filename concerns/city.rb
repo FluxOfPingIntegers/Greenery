@@ -5,6 +5,7 @@ class City
     self.zone_cleanup(zone)
     self.title_assign(title, zone)
     x = @state
+    #binding.pry
     x.cities << self
     @state = x.abb
   end
