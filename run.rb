@@ -14,7 +14,6 @@ prompt = TTY::Prompt.new
 selection = prompt.select("Using the arrow keys, please select which city is closest to where your garden will reside and press enter.",
      state.cities.map{|x| x.name})
 selection = state.cities.find {|x| x.name == selection }
-binding.pry
 puts "The city you have selected is in the USDA hardiness zone of #{selection.zone.name}."
 puts "Please consult the internet for the month to plant the following plants near #{selection.name}."
 c = 1
@@ -22,6 +21,3 @@ while c < 11
     puts "#{c}.  #{selection.zone.plants[c-1]}."
     c += 1
 end     
-
-
-binding.pry
