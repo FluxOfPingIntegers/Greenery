@@ -58,7 +58,7 @@ Acknowledgments
 
 Tech/Gems used
     • Ruby
-    • All Ruby gems can be found in the Gemfile
+    • All Ruby gems and their versions can be found in Gemfile.lock
 
 
 License
