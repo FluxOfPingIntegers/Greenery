@@ -9,15 +9,18 @@ Current build status:  Under development
 Getting Started
 
   Step 1:
-In your terminal, type “ruby run.rb”
+In your terminal, type “bundle install”
 
   Step 2:
-After reading the prompt, please type in the two letter abbreviation for your state.  If you happen to reside in Puerto Rico you can simply type your countries name.
+In your terminal, type “ruby run.rb”
 
   Step 3:
-If there are multiple zones for your state, you will be prompted to select the city closest to you.  Please use the arrow keys to select which city is closest to your garden and press enter.
+After reading the prompt, please type in the two letter abbreviation for your state.  If you happen to reside in Puerto Rico you can simply type your countries name.
 
   Step 4:
+If there are multiple zones for your state, you will be prompted to select the city closest to you.  Please use the arrow keys to select which city is closest to your garden and press enter.
+
+  Step 5:
 You will now see your hardiness zone and a list of plants that can grow in your region.  Google what month you can plant these plants in your hardiness zone and have fun gardening!
 
 Websites referenced for data
