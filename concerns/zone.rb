@@ -11,12 +11,6 @@ class Zone
     self.save
   end
 
-  def add_plant(plant)
-    if @plants.none? {plant}
-        @plants << plant
-    end
-  end
-
   def plants
     @plants
   end
