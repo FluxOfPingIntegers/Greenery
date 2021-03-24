@@ -24,8 +24,9 @@ If there are multiple zones for your state, you will be prompted to select the c
 You will now see your hardiness zone and a list of plants that can grow in your region.  Google what month you can plant these plants in your hardiness zone and have fun gardening!
 
 Websites referenced for data
-    • Wikipedia - https://en.wikipedia.org/wiki/Hardiness_zone#USDA_hardiness_zones
-    • Almanac - https://www.almanac.com/plants/hardiness/2
+    • Infoplease (for states) - https://www.infoplease.com/us/postal-information/state-abbreviations-and-state-postal-codes
+    • Wikipedia (for cities and their zone relations) - https://en.wikipedia.org/wiki/Hardiness_zone#USDA_hardiness_zones
+    • Almanac (for plants)- https://www.almanac.com/plants/hardiness/2
 
 Installation
 

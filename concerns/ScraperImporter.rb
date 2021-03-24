@@ -9,21 +9,36 @@ class ScraperImporter
   end
 
   def states
-    states = [
-      ["AK", "Alaska"], ["AL", "Alabama"], ["AR", "Arkansas"], ["AZ", "Arizona"], 
-       ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DC", "D.C.[11]"], ["DE", "Delaware"], 
-       ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"],  ["IA", "Iowa"], ["ID", "Idaho"], 
-       ["IL", "Illinois"], ["IN", "Indiana"], ["KS", "Kansas"], ["KY", "Kentucky"], ["LA", "Louisiana"], 
-       ["MA", "Massachusetts"], ["MD", "Maryland"], ["ME", "Maine"], ["MI", "Michigan"], ["MN", "Minnesota"], 
-       ["MO", "Missouri"], ["MS", "Mississippi"], ["MT", "Montana"], ["NC", "North Carolina"], ["ND", "North Dakota"], 
-       ["NE", "Nebraska"], ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"], ["NV", "Nevada"], 
-       ["NY", "New York"], ["OH", "Ohio"], ["OK", "Oklahoma"], ["OR", "Oregon"], ["PA", "Pennsylvania"], ["PR", "Puerto Rico"], 
-       ["RI", "Rhode Island"], ["SC", "South Carolina"], ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"], 
-       ["UT", "Utah"], ["VA", "Virginia"], ["VT", "Vermont"], ["WA", "Washington"], ["WI", "Wisconsin"], 
-       ["WV", "West Virginia"], ["WY", "Wyoming"]
-      ]
-      states.each {|x| State.new("#{x[1]}", "#{x[0]}")}
-      @state_names = states
+    url = URI.parse("https://www.infoplease.com/us/postal-information/state-abbreviations-and-state-postal-codes")
+    state_response = Net::HTTP.get(url)
+    noko_html = Nokogiri::HTML(state_response)
+    state_array = []
+    c = 0
+    while c < 50
+      state_array << noko_html.css(".sgmltable").children[1].children[c].content
+      c += 1
+    end
+    c = 28
+    state_array.delete_at(8)
+    state_array = state_array.map {|x| x.split(" ")}
+    while c < 34
+      state_array[c][0..1] = state_array[c][0..1].join(" ")
+      c += 1
+    end
+    c = 38
+    while c < 41
+      state_array[c][0..1] = state_array[c][0..1].join(" ")
+      c += 1
+    end
+    state_array[47][0..1] = state_array[47][0..1].join(" ")
+    c = 0
+    state_array.each do |x|
+      x[1] = x[1][-2..-1]
+    end
+    state_array << ["D.C.[11]", "DC"]
+    state_array << ["Puerto Rico", "PR"]
+    state_array << ["Wyoming", "WY"]
+      state_array.each {|x| State.new("#{x[0]}", "#{x[1]}")}
   end
 
   def zones
