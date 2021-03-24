@@ -12,7 +12,7 @@ Getting Started
 In your terminal, type “bundle install”
 
   Step 2:
-In your terminal, type “ruby run.rb”
+In your terminal, type “bin/run”
 
   Step 3:
 After reading the prompt, please type in the two letter abbreviation for your state.

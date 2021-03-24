@@ -1,3 +1,4 @@
 require 'bundler/setup'
 Bundler.require(:default)
-require_all './concerns'
+require_all './lib'
+require_all './bin'

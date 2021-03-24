@@ -10,10 +10,6 @@ class Zone
     @plants = []
     self.save
   end
-
-  def plants
-    @plants
-  end
   
   def cleanup(name)
     if name.include? "/"
