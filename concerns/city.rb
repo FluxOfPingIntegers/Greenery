@@ -30,6 +30,7 @@ class City
       zone = x[0]
     end
     zone = zone.to_i
+    zone = zone.to_s
     x = Zone.all.find {|i| i.name == zone}
     @zone = x
   end

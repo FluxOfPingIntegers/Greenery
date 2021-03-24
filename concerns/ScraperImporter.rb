@@ -1,5 +1,6 @@
 class ScraperImporter
-  attr_accessor :name, :state_names, :zone_names
+  attr_accessor :wiki_html
+  attr_reader :name
 
   def initialize(name)
     @name = name
@@ -41,10 +42,14 @@ class ScraperImporter
   end
 
   def zones
-    zones = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    zones.each {|x| Zone.new(x)}
-    scraped_zones = Zone.all[1..10]
-
+    url = URI.parse("https://en.wikipedia.org/wiki/Hardiness_zone")
+    response = Net::HTTP.get(url)
+    @wiki_html = Nokogiri::HTML(response)
+    wikitable = @wiki_html.css(".wikitable").children[1].content
+    wikitable = wikitable.split("\n")
+    wikitable.reject! {|x| x == "" || x == "Zone" || x == "From" || x == "To" || x == "a" || x == "b" || x.length > 3}
+    wikitable.each {|x| Zone.new(x)}
+    scraped_zones = Zone.all[2..11]
     scraped_zones.each do |x|
       url = URI.parse("https://www.almanac.com/plants/hardiness/#{x.name}")
       response = Net::HTTP.get(url)
@@ -56,17 +61,13 @@ class ScraperImporter
       end
     end
     hard_plants = ["Basil", "Dill", "Mint", "Hibiscus", "Aloe", "Chili Peppers", "Cucumbers", "Spinach", "Bananas", "Avacados"]
-    zone12 = Zone.all[11]
+    zone12 = Zone.all[12]
     zone12.plants = hard_plants
 
   end
 
   def cities
-
-    url = URI.parse("https://en.wikipedia.org/wiki/Hardiness_zone")
-    response = Net::HTTP.get(url)
-    noko_html = Nokogiri::HTML(response)
-    wiki_table = noko_html.css(".mw-parser-output").children[38]
+    wiki_table = @wiki_html.css(".mw-parser-output").children[38]
     table_as_string = wiki_table.content
     city_data = table_as_string.split("\n")
     city_data.reject! {|x| x == "" || x == "City" || x == "State" || x == "Zone"}
