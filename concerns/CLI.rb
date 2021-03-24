@@ -10,15 +10,20 @@ class Interface
         end
         state = State.all.find {|x| x.abb == state}
         prompt = TTY::Prompt.new
-        selection = prompt.select("Using the arrow keys, please select which city is closest to where your garden will reside and press enter.",
-             state.cities.map{|x| x.name})
-        selection = state.cities.find {|x| x.name == selection }
-        puts "The city you have selected is in the USDA hardiness zone of #{selection.zone.name}."
-        puts "Please consult the internet for the month to plant the following plants near #{selection.name}."
-        c = 1
-        while c < 11
+        selection = prompt.select("Using the arrow keys, please select which city is closest to where your garden will reside and press enter.
+        If you'd like to make a different state selection, please select <back>",
+             state.cities.map{|x| x.name} << "<back>")
+        if selection == "<back>"
+            inquiry
+        else
+          selection = state.cities.find {|x| x.name == selection }
+          puts "The city you have selected is in the USDA hardiness zone of #{selection.zone.name}."
+          puts "Please consult the internet for the month to plant the following plants near #{selection.name}."
+          c = 1
+          while c < 11
             puts "#{c}.  #{selection.zone.plants[c-1]}."
             c += 1
+          end
         end
     end
 end
