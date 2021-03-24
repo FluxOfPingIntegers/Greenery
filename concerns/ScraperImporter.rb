@@ -14,13 +14,13 @@ class ScraperImporter
     noko_html = Nokogiri::HTML(state_response)
     state_array = []
     c = 0
-    while c < 50
+    while c < 51
       state_array << noko_html.css(".sgmltable").children[1].children[c].content
       c += 1
     end
-    c = 28
     state_array.delete_at(8)
     state_array = state_array.map {|x| x.split(" ")}
+    c = 28
     while c < 34
       state_array[c][0..1] = state_array[c][0..1].join(" ")
       c += 1
@@ -37,7 +37,6 @@ class ScraperImporter
     end
     state_array << ["D.C.[11]", "DC"]
     state_array << ["Puerto Rico", "PR"]
-    state_array << ["Wyoming", "WY"]
       state_array.each {|x| State.new("#{x[0]}", "#{x[1]}")}
   end
 
