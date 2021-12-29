@@ -1,3 +1,5 @@
+require 'pry'
+
 class City
   attr_accessor :name, :state, :zone
 

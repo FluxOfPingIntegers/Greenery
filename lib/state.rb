@@ -5,7 +5,7 @@ class State
 
   @@all = []
   def initialize(name, abb)
-    @name = name
+    @name = (name == "D.C.[11]" ? "D.C." : name)
     @abb = abb
     @cities = []
     self.save

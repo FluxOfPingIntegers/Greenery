@@ -1,3 +1,5 @@
+require 'pry'
+
 class ScraperImporter
   attr_accessor :wiki_html
   attr_reader :name
@@ -77,9 +79,9 @@ class ScraperImporter
               "Helena, Montana" => 3, "Hayword, Wisconsin" => 3, "Jackson, Wyoming" => 3, "Bismark, North Dakota" => 4,
               "Concord, New Hampshire" => 5, "Cheyenne, Wyoming" => 5, "Frankfort, Kentucky" => 6, "Dover, Delaware" => 7,
               "Trenton, New Jersey" => 7, "Little Rock, Arkansas" => 7, "Jackson, Mississippi" => 8, "Richmond, Virginia" => 7
-             }
-    cities = scrape_cities.merge(hard_cities)
-    cities.each_pair{|key, value| City.new("#{key}", "#{value}")}
+    }
+    cities_hash = scrape_cities.merge(hard_cities)
+    cities_hash.each_pair {|key, value| City.new("#{key}", "#{value}")}
   end
 
 
