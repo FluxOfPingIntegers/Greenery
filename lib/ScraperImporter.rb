@@ -40,7 +40,7 @@ class ScraperImporter
     end
     state_array << ["D.C.[11]", "DC"]
     state_array << ["Puerto Rico", "PR"]
-      state_array.each {|x| State.new("#{x[0]}", "#{x[1]}")}
+    state_array.each {|x| State.new("#{x[0]}", "#{x[1]}")}
   end
 
   def zones
@@ -56,10 +56,10 @@ class ScraperImporter
       url = URI.parse("https://www.almanac.com/plants/hardiness/#{x.name}")
       response = Net::HTTP.get(url)
       noko_html = Nokogiri::HTML(response)
-      c = 1
-      while c < 20
+      c = 4
+      while c < 60
         x.plants << noko_html.css(".field-content").children[c].content
-        c += 2
+        c += 6
       end
     end
     hard_plants = ["Basil", "Dill", "Mint", "Hibiscus", "Aloe", "Chili Peppers", "Cucumbers", "Spinach", "Bananas", "Avacados"]
