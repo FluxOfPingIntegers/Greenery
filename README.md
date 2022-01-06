@@ -1,8 +1,8 @@
-### Greenery
+# Greenery
 
 This is a CLI application meant to assist people in the United States with their garden planning.  First the user types in the two letter abbreviation for the State their garden will be in.  Then the user will be prompted to select a city within this state that is the closest to their gardens location if multiple city/hardiness zones exist.  The app will then read which USDA hardiness zone that city is in, and print out a list of plants that can grow in that climate.
 
-# Current build status:  Under development
+### Current build status:  Under development
 
 
 
